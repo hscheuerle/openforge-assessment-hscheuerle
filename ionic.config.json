@@ -1,5 +1,7 @@
 {
   "name": "OpenForge-assessment",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
