@@ -18,7 +18,7 @@ export class GithubService {
     this.devToken = environment.devToken;
     this.options = {
       headers: {
-        Accept: 'application/vnd.github.v3+json',
+        Accept: 'application/vnd.github.v3.text-match+json',
         'Content-Type': 'application/json',
         Authorization: `token ${this.devToken}`,
       },
@@ -42,6 +42,15 @@ export class GithubService {
         return { users: res.body, since };
       })
     );
+  }
+
+  searchUser(input) {
+    return this.http.get('https://api.github.com/search/users', {
+      headers: this.options.headers,
+      params: {
+        q: `${input}+type:user`
+      }
+    });
   }
 }
 

@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { loadUsers, usersLoadedSuccess } from '../actions/github.actions';
-import * as parseLinkHeader from 'parse-link-header';
+import { usersLoadedSuccess } from '../actions/github.actions';
 
 export const initialState = {
+    selectedUser: '',
     users: [],
     since: '0',
 };

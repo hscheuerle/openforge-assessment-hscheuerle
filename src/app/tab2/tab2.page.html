@@ -3,7 +3,22 @@
     <ion-title>
       Users
     </ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-toolbar>
+    <!-- value param when routed directly -->
+  <!-- has debouce parameter for not rxjs required -->
+  <!-- placeholder field -->
+  <!-- (ion-change)="getUser($event)" -->
+      <ion-searchbar 
+      debounce="500"
+      placeholder="Search GitHub Users"
+      (ionChange)="searchUser($event)"
+      ></ion-searchbar>
+  </ion-toolbar>
+
+
+</ion-content>
