@@ -7,8 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="loadMoreUsers()">Load More Users</ion-button>
-  <ion-list *ngFor="let user of users$ | async">
+  <ion-list *ngFor="let user of users">
     <!-- TODO: link to search tab with search value entered -->
     <ion-item href="todo">
       <ion-avatar slot="start">
@@ -22,6 +21,7 @@
 
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
