@@ -7,5 +7,21 @@
 </ion-header>
 
 <ion-content>
-    
+  <ion-button (click)="loadMoreUsers()">Load More Users</ion-button>
+  <ion-list *ngFor="let user of users$ | async">
+    <!-- TODO: link to search tab with search value entered -->
+    <ion-item href="todo">
+      <ion-avatar slot="start">
+        <img [src]="user.avatar_url" [alt]="'github avatar for user' + user.login">
+      </ion-avatar>
+      <ion-label>
+        {{ user.login }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+
+  </ion-infinite-scroll>
 </ion-content>
