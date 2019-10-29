@@ -4,16 +4,14 @@ import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
 import { GithubService } from '../shared/github.service';
 import { Store } from '@ngrx/store';
-import { searchUser, searchUserSuccess } from '../actions/github.actions';
-
-type User = any;
+import { searchUser, searchUserSuccess, UserBasic } from '../actions/github.actions';
 
 @Injectable()
 export class GithubEffects {
     constructor(
         private actions$: Actions,
         private githubService: GithubService,
-        private store: Store<{ github: { users: User[], since: string, selectedUser: string } }>
+        private store: Store<{ github: { users: UserBasic[], since: string, selectedUser: string } }>
     ) { }
 
     loadUsers$ = createEffect(() => this.actions$.pipe(

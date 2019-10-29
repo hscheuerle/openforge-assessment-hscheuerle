@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import { usersLoadedSuccess, searchUserSuccess, getUserSuccess, clearUser, UserBasic } from '../actions/github.actions';
 
-interface AppState {
+interface GithubState {
     selectedUser: object;
     users: UserBasic[];
     since: string;
 }
-export const initialState: AppState = {
+export const initialState: GithubState = {
     selectedUser: undefined,
     users: [],
     since: '0',

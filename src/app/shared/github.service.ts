@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import * as parseLinkHeader from 'parse-link-header';
 import { map } from 'rxjs/operators';
+import { UserBasic } from '../actions/github.actions';
 
 // TODO: move devtoken to provider
 
@@ -27,14 +28,14 @@ export class GithubService {
   }
 
   requestUsers(sinceId: string) {
-    return this.http.get('https://api.github.com/users', {
+    return this.http.get<UserBasic[]>('https://api.github.com/users', {
       headers: this.options.headers,
       observe: this.options.observe,
       params: {
         since: sinceId
       }
     }).pipe(
-      map((res: HttpResponse<any>) => {
+      map((res: HttpResponse<UserBasic[]>) => {
         const linkHeader = res.headers.get('Link');
         const links = parseLinkHeader(linkHeader);
         const { since } = links.next;

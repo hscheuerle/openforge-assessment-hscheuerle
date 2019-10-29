@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-
-type User = any;
+import { UserBasic } from '../actions/github.actions';
 
 @Component({
   selector: 'app-tab1',
@@ -10,15 +9,16 @@ type User = any;
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit, OnDestroy {
-  users: User[];
+  users: UserBasic[];
   eventRef;
   subscription: Subscription;
 
   constructor(
-    private store: Store<{ github: { users: User[] } }>
+    private store: Store<{ github: { users: UserBasic[] } }>
     ) { }
 
   ngOnInit() {
+    // TODO: check if needs to be in did enter and did leave, as routing does not always destroy components in ionic
     this.subscription = this.store.select(state => state.github.users).subscribe(users => {
       this.users = users;
       if (this.eventRef) {
