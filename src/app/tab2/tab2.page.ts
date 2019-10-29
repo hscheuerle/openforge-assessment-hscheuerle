@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+class Profile {
+  constructor() {
+
+  }
+}
 
 @Component({
   selector: 'app-tab2',
@@ -7,10 +14,10 @@ import { Store } from '@ngrx/store';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  user;
+  selectedUser$: Observable<object> = this.store.select(state => state.github.selectedUser);
 
   constructor(
-    private store: Store<{ github: { selectedUser: string } }>
+    private store: Store<{ github: { selectedUser: object } }>
   ) {}
 
   searchUser(event) {

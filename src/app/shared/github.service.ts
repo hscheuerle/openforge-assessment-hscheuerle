@@ -52,5 +52,11 @@ export class GithubService {
       }
     });
   }
+
+  getUser(username) {
+    return this.http.get(`https://api.github.com/users/${username}`, {
+      headers: this.options.headers,
+    });
+  }
 }
 

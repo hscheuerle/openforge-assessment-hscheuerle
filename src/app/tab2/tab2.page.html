@@ -14,11 +14,19 @@
   <!-- placeholder field -->
   <!-- (ion-change)="getUser($event)" -->
       <ion-searchbar 
-      debounce="500"
+      debounce="1000"
       placeholder="Search GitHub Users"
       (ionChange)="searchUser($event)"
       ></ion-searchbar>
   </ion-toolbar>
 
+  <ng-container *ngIf="selectedUser$ | async as user">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ user.name }}</ion-card-title>
+        <ion-card-subtitle>{{ user.login }}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ng-container>
 
 </ion-content>

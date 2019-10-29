@@ -4,6 +4,7 @@ import { EMPTY, of } from 'rxjs';
 import { map, mergeMap, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
 import { GithubService } from '../shared/github.service';
 import { Store } from '@ngrx/store';
+import { searchUser, searchUserSuccess } from '../actions/github.actions';
 
 type User = any;
 
@@ -18,7 +19,6 @@ export class GithubEffects {
     loadUsers$ = createEffect(() => this.actions$.pipe(
         ofType('[Feed Page] Load Users'),
         withLatestFrom(this.store.select(state => state.github.since)),
-        // should be exhaustmap?
         exhaustMap(([action, since]) => this.githubService.requestUsers(since)
             .pipe(
                 // change payload type to res
@@ -27,11 +27,22 @@ export class GithubEffects {
             ))
     ));
 
-    selectedUser$ = createEffect(() => this.actions$.pipe(
-        ofType('[Github API] Search User'),
+    searchUser$ = createEffect(() => this.actions$.pipe(
+        ofType(searchUser),
         tap(action => console.log(action)),
         switchMap(action => this.githubService.searchUser(action.props.input).pipe(
-            map(res => ({ type: '[Github API] Users Loaded', payload: res}))
+            map(res => ({ type: '[Github API] Search User Success', payload: res})),
+            catchError(() => of({ type: '[Github API] Search User Error'})),
+        )
+    )));
+
+    getUser$ = createEffect(() => this.actions$.pipe(
+        ofType(searchUserSuccess),
+        // need to handle items better!
+        tap(action => console.log(action)),
+        switchMap(action => this.githubService.getUser(action.payload.items[0].login).pipe(
+            map(res => ({ type: '[Github API] Get User Success', payload: res})),
+            catchError(() => of({ type: '[Github API] Get User Error'})),
         )
     )));
 }
