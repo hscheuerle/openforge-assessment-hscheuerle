@@ -1,98 +1,103 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Users
+      Find Users
     </ion-title>
-    
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-toolbar>
     <!-- value param when routed directly -->
-  <!-- has debouce parameter for not rxjs required -->
-  <!-- placeholder field -->
-  <!-- (ion-change)="getUser($event)" -->
-      <ion-searchbar 
-      debounce="1000"
-      placeholder="Search GitHub Users"
-      (ionChange)="searchUser($event)"
-      (ionClear)="clearValue"
-      [(ngModel)]="value"
-      ></ion-searchbar>
+    <!-- has debouce parameter for not rxjs required -->
+    <!-- placeholder field -->
+    <!-- (ion-change)="getUser($event)" -->
+    <ion-searchbar debounce="1000" placeholder="Search GitHub Users" (ionChange)="searchUser($event)"
+      (ionClear)="clearValue()" [(ngModel)]="value"></ion-searchbar>
   </ion-toolbar>
 
   <ng-container *ngIf="selectedUser$ | async as user">
     <!--  && user.login === value -->
     <ng-container *ngIf="user && value">
 
-    <ion-card>
+      <ion-card>
 
-      <ion-item lines="full">
-        <ion-avatar slot="start">
-          <img [src]="user.avatar_url">
-        </ion-avatar>
-              <ion-card-header>
-          <ion-card-title>{{ user.name }}</ion-card-title>
-          <ion-card-subtitle>{{ user.login }}</ion-card-subtitle>
-        </ion-card-header>
-      </ion-item>
-
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-label class="ion-text-wrap">
-            <h2 *ngIf="user.bio">Bio</h2>
-            <ion-text [color]="user.bio ? 'dark' : 'medium'">
-              <p>
-                {{ user.bio || 'No Bio' }}
-              </p>
-            </ion-text>
-          </ion-label>
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <img [src]="user.avatar_url">
+          </ion-avatar>
+          <ion-card-header>
+            <ion-card-title>{{ user.name }}</ion-card-title>
+            <ion-card-subtitle>{{ user.login }}</ion-card-subtitle>
+          </ion-card-header>
         </ion-item>
 
-        <!-- User's Company -->
-        <ion-item lines="none">
-          <ion-icon name="people" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.company; then ifCompany else notProvided"></ion-label>
-          
-          <ng-template #ifCompany>
-            <ion-text>
-              <h3>{{ user.company }}</h3>
-            </ion-text>
-          </ng-template>
-          
-          <ng-template #notProvided>
-            <ion-text color="medium"><h4>Not Provided</h4></ion-text>
-          </ng-template>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap">
+              <h2 *ngIf="user.bio">Bio</h2>
+              <ion-text [color]="user.bio ? 'dark' : 'medium'">
+                <p>
+                  {{ user.bio || 'No Bio' }}
+                </p>
+              </ion-text>
+            </ion-label>
+          </ion-item>
 
-        </ion-item>
+          <!-- User's Company -->
+          <ion-item lines="none">
+            <ion-icon name="people" slot="start" size="small"></ion-icon>
+            <ion-label *ngIf="user.company; then ifCompany else notProvided"></ion-label>
 
-        <!-- User's Location -->
-        <ion-item lines="none">
-          <ion-icon name="pin" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.location; then ifLocation else notProvided"></ion-label>
+            <ng-template #ifCompany>
+              <ion-text>
+                <h3>{{ user.company }}</h3>
+              </ion-text>
+            </ng-template>
 
-          <ng-template #ifLocation>
-            <ion-text>
-              <h3>{{ user.location }}</h3>
-            </ion-text>
-          </ng-template>
+            <ng-template #notProvided>
+              <ion-text color="medium">
+                <h4>Not Provided</h4>
+              </ion-text>
+            </ng-template>
 
-        </ion-item>
-        
-        <ion-item lines="none" [detail]="user.email" [href]="user.email ? 'mailto:' + user.email : undefined">
-          <ion-icon name="mail" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.email; else notProvided"><h3>{{ user.email }}</h3></ion-label>
-        </ion-item>
+          </ion-item>
 
-        <!-- TODO: fix this temp that makes sure link provides protocol -->
-        <ion-item lines="none" [detail]="user.blog" [href]="user.blog ? 'https://' + user.blog.replace('http://','').replace('https://', '') : undefined" rel="noopener" target="_blank">
-          <ion-icon name="link" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.blog; else notProvided"><h3>{{ user.blog }}</h3></ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+          <!-- User's Location -->
+          <ion-item lines="none">
+            <ion-icon name="pin" slot="start" size="small"></ion-icon>
+            <ion-label *ngIf="user.location; then ifLocation else notProvided"></ion-label>
 
-  </ng-container>
+            <ng-template #ifLocation>
+              <ion-text>
+                <h3>{{ user.location }}</h3>
+              </ion-text>
+            </ng-template>
+
+          </ion-item>
+
+          <ion-item lines="none" [detail]="user.email" [href]="user.email ? 'mailto:' + user.email : undefined">
+            <ion-icon name="mail" slot="start" size="small"></ion-icon>
+            <ion-label *ngIf="user.email; else notProvided">
+              <h3>{{ user.email }}</h3>
+            </ion-label>
+          </ion-item>
+
+          <!-- TODO: fix this temp that makes sure link provides protocol -->
+          <!-- User's Blog (or Website) -->
+          <ion-item lines="none" [detail]="user.blog" [href]="user.blog ? 'https://' + user.blog.replace('http://','').replace('https://', '') : undefined"
+            rel="noopener" target="_blank">
+            <ion-icon name="link" slot="start" size="small"></ion-icon>
+            <ion-label *ngIf="user.blog; else notProvided">
+              <h3>{{ user.blog }}</h3>
+            </ion-label>
+          </ion-item>
+
+
+        </ion-card-content>
+      </ion-card>
+
+    </ng-container>
   </ng-container>
 </ion-content>
