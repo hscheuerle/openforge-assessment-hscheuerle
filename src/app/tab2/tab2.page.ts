@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 class Profile {
   constructor() {
@@ -21,6 +22,7 @@ export class Tab2Page {
   constructor(
     private store: Store<{ github: { selectedUser: object } }>,
     private route: ActivatedRoute,
+    private iab: InAppBrowser,
   ) { }
 
   ionViewDidEnter() {
@@ -48,6 +50,11 @@ export class Tab2Page {
 
   clearValue() {
     this.store.dispatch({ type: '[Github API] Clear User'});
+  }
+
+  // TODO: search for how to choose target based on system
+  openInAppBrowser(url) {
+    this.iab.create(url, '_blank', )
   }
 
 }
