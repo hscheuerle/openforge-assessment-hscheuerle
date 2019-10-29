@@ -17,7 +17,6 @@
     </ion-row>
 
     <ng-container *ngIf="selectedUser$ | async as user">
-      <!--  && user.login === value -->
       <ng-container *ngIf="user && value">
 
         <ion-row class="ion-justify-content-center">
@@ -27,13 +26,12 @@
             <ion-card>
 
               <!-- User's Name and Login -->
-              <!-- TODO: styling defaults for when no name is provided -->
               <ion-item lines="full">
                 <ion-avatar slot="start">
                   <img [src]="user.avatar_url">
                 </ion-avatar>
                 <ion-card-header>
-                  <ion-card-title>{{ user.name }}</ion-card-title>
+                  <ion-card-title *ngIf="user.name">{{ user.name }}</ion-card-title>
                   <ion-card-subtitle>{{ user.login }}</ion-card-subtitle>
                 </ion-card-header>
               </ion-item>
@@ -102,7 +100,6 @@
                       </h5>
                     </ion-label>
                   </ion-chip>
-                  <!-- Hover or info on click -->
                   <ion-chip [appColorBreak]="user.public_gists > 5">
                     <ion-label>
                       <h5>

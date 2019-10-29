@@ -5,7 +5,6 @@ import { DEV_TOKEN } from '../../.env';
 
 export const environment = {
   production: false,
-  // TODO: move to provider
   devToken: DEV_TOKEN
 };
 
