@@ -17,7 +17,7 @@ export class GithubEffects {
     ) { }
 
     loadUsers$ = createEffect(() => this.actions$.pipe(
-        ofType('[Feed Page] Load Users'),
+        ofType('[Github API] Load Users'),
         withLatestFrom(this.store.select(state => state.github.since)),
         exhaustMap(([action, since]) => this.githubService.requestUsers(since)
             .pipe(

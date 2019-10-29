@@ -31,7 +31,7 @@ export interface UserPayload {
     }[];
 }
 
-export const loadUsers = createAction('[Feed Page] Load Users');
+export const loadUsers = createAction('[Github API] Load Users');
 export const usersLoadedSuccess = createAction('[Github API] Users Loaded Success', props<{ payload: { users: [], since: string } }>());
 export const searchUser = createAction('[Github API] Search User', props<{ props: { input: string }}>());
 export const searchUserSuccess = createAction('[Github API] Search User Success', props<{ payload: UserPayload }>());

@@ -34,16 +34,16 @@ export class Tab1Page implements OnInit, OnDestroy {
 
   ionViewDidEnter() {
     if (this.users.length === 0) {
-      this.store.dispatch({ type: '[Feed Page] Load Users'});
+      this.store.dispatch({ type: '[Github API] Load Users'});
     }
   }
 
   loadData(event) {
     this.eventRef = event;
-    this.store.dispatch({ type: '[Feed Page] Load Users'});
+    this.store.dispatch({ type: '[Github API] Load Users'});
   }
 
   loadMoreUsers() {
-    this.store.dispatch({ type: '[Feed Page] Load Users'});
+    this.store.dispatch({ type: '[Github API] Load Users'});
   }
 }
