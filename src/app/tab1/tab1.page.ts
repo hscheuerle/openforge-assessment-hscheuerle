@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { UserBasic } from '../actions/github.actions';
+import { UserBasic } from '../interfaces/User';
 
 @Component({
   selector: 'app-tab1',
