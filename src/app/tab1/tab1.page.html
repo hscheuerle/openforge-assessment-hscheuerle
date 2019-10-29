@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Recent Github Users
     </ion-title>
@@ -7,22 +7,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let user of users">
-    <!-- TODO: link to search tab with search value entered -->
-    <!-- is this reloading? check ion-route usage -->
-    <ion-item [routerLink]="['/tabs/tab2']" [queryParams]="{ search: user.login }">
-      <ion-avatar slot="start">
-        <img [src]="user.avatar_url" [alt]="'github avatar for user' + user.login">
-      </ion-avatar>
-      <ion-label>
-        {{ user.login }}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-lg="8">
+        <ion-card>
+          <ion-list *ngFor="let user of users">
+            <!-- TODO: link to search tab with search value entered -->
+            <!-- is this reloading? check ion-route usage -->
+            <ion-item [routerLink]="['/tabs/tab2']" [queryParams]="{ search: user.login }">
+              <ion-avatar slot="start">
+                <img [src]="user.avatar_url" [alt]="'github avatar for user' + user.login">
+              </ion-avatar>
+              <ion-label>
+                {{ user.login }}
+              </ion-label>
+            </ion-item>
+          </ion-list>
+
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-card>
 
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
 </ion-content>
