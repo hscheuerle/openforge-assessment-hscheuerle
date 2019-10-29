@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
+import { State } from '../reducers';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +16,7 @@ export class Tab2Page {
   browser: InAppBrowserObject;
 
   constructor(
-    private store: Store<{ github: { selectedUser: object } }>,
+    private store: Store<State>,
     private route: ActivatedRoute,
     private iab: InAppBrowser,
   ) { }
@@ -46,7 +47,6 @@ export class Tab2Page {
     this.store.dispatch({ type: '[Github API] Clear User'});
   }
 
-  // TODO: search for how to choose target based on system
   openInAppBrowser(event, blog) {
     event.preventDefault();
     const prefixUrl = 'https://' + blog.replace('http://', '').replace('https://', '');

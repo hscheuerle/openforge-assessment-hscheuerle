@@ -7,9 +7,15 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { githubReducer } from './github.reducers';
+import { UserDetailed, UserBasic } from '../interfaces/User';
 
-// TODO: fix what was: export interface State {}
-type State = any;
+export interface State {
+  github: {
+    selectedUser: UserDetailed;
+    users: UserBasic[];
+    since: string;
+  };
+}
 
 export const reducers: ActionReducerMap<State> = {
   github: githubReducer

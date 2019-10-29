@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { UserBasic } from '../interfaces/User';
+import { State } from '../reducers';
 
 @Component({
   selector: 'app-tab1',
@@ -14,7 +15,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private store: Store<{ github: { users: UserBasic[] } }>
+    private store: Store<State>
     ) { }
 
   ngOnInit() {

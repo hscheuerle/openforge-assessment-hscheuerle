@@ -6,13 +6,14 @@ import { GithubService } from '../shared/github.service';
 import { Store, Action } from '@ngrx/store';
 import { searchUser, searchUserSuccess } from '../actions/github.actions';
 import { UserBasic, SeachedUserSuccessPayload } from '../interfaces/User';
+import { State } from '../reducers';
 
 @Injectable()
 export class GithubEffects {
     constructor(
         private actions$: Actions,
         private githubService: GithubService,
-        private store: Store<{ github: { users: UserBasic[], since: string, selectedUser: string } }>
+        private store: Store<State>
     ) { }
 
     loadUsers$ = createEffect(() => this.actions$.pipe(

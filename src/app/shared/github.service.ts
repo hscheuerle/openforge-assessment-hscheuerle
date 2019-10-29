@@ -6,7 +6,6 @@ import * as parseLinkHeader from 'parse-link-header';
 import { map } from 'rxjs/operators';
 import { UserBasic } from '../interfaces/User';
 
-// TODO: move devtoken to provider
 
 @Injectable({
   providedIn: 'root'
