@@ -38,7 +38,6 @@ export class GithubService {
         const linkHeader = res.headers.get('Link');
         const links = parseLinkHeader(linkHeader);
         const { since } = links.next;
-        console.log(res.body);
         return { users: res.body, since };
       })
     );

@@ -27,7 +27,6 @@ export class Tab2Page {
 
   ionViewDidEnter() {
     const search = this.route.snapshot.queryParamMap.get('search');
-    console.log(search);
     if (search) { this.value = search; } else { this.value = ''; }
     if (this.value) {
       // change to Get User?

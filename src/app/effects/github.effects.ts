@@ -21,7 +21,6 @@ export class GithubEffects {
         withLatestFrom(this.store.select(state => state.github.since)),
         exhaustMap(([action, since]) => this.githubService.requestUsers(since)
             .pipe(
-                // change payload type to res
                 map(res => ({ type: '[Github API] Users Loaded Success', payload: res })),
                 catchError(() => of({ type: '[Github API] Users Loaded Error'})),
             ))
@@ -29,7 +28,6 @@ export class GithubEffects {
 
     searchUser$ = createEffect(() => this.actions$.pipe(
         ofType(searchUser),
-        tap(action => console.log(action)),
         switchMap(action => this.githubService.searchUser(action.props.input).pipe(
             map(res => ({ type: '[Github API] Search User Success', payload: res})),
             catchError(() => of({ type: '[Github API] Search User Error'})),
@@ -39,7 +37,6 @@ export class GithubEffects {
     getUser$ = createEffect(() => this.actions$.pipe(
         ofType(searchUserSuccess),
         // need to handle items better!
-        tap(action => console.log(action)),
         switchMap(action => this.githubService.getUser(action.payload.items[0].login).pipe(
             map(res => ({ type: '[Github API] Get User Success', payload: res})),
             catchError(() => of({ type: '[Github API] Get User Error'})),
