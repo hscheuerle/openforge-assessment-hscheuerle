@@ -2,13 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
-class Profile {
-  constructor() {
-
-  }
-}
+import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-tab2',
@@ -18,6 +12,7 @@ class Profile {
 export class Tab2Page {
   value;
   selectedUser$: Observable<object> = this.store.select(state => state.github.selectedUser);
+  browser: InAppBrowserObject;
 
   constructor(
     private store: Store<{ github: { selectedUser: object } }>,
@@ -28,21 +23,21 @@ export class Tab2Page {
   ionViewDidEnter() {
     const search = this.route.snapshot.queryParamMap.get('search');
     if (search) { this.value = search; } else { this.value = ''; }
-    if (this.value) {
-      // change to Get User?
-      this.store.dispatch({ type: '[Github API] Search User', props: { input: this.value } });
-    }
   }
 
   ionViewDidLeave() {
     this.store.dispatch({ type: '[Github API] Clear User'});
+    if (this.browser) {
+      this.browser.close();
+    }
   }
 
   searchUser(event) {
     const { value } = event.target;
     if (value !== '') {
+      console.log('searchUser dispatches search');
       this.store.dispatch({ type: '[Github API] Search User', props: { input: value } });
-    } else { // when using ctrl + backspace to clear
+    } else { // when using backspace | ctrl + backspace to clear
       this.store.dispatch({ type: '[Github API] Clear User'});
     }
   }
@@ -52,9 +47,9 @@ export class Tab2Page {
   }
 
   // TODO: search for how to choose target based on system
-  openInAppBrowser(event, url) {
+  openInAppBrowser(event, blog) {
     event.preventDefault();
-    this.iab.create(url, '_blank');
+    this.browser = this.iab.create(blog, '_blank');
   }
 
 }
