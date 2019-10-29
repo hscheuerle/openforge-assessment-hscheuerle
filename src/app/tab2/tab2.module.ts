@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
-import { RepositoriesDirective } from '../shared/repositories.directive';
 import { ColorBreakDirective } from './color-break.directive';
 
 @NgModule({
@@ -14,6 +13,6 @@ import { ColorBreakDirective } from './color-break.directive';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }])
   ],
-  declarations: [Tab2Page, RepositoriesDirective, ColorBreakDirective]
+  declarations: [Tab2Page, ColorBreakDirective]
 })
 export class Tab2PageModule {}
