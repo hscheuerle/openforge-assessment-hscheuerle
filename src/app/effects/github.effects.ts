@@ -26,6 +26,7 @@ export class GithubEffects {
             ))
     ));
 
+    // only map success when res contains values
     searchUser$ = createEffect(() => this.actions$.pipe(
         ofType(searchUser),
         switchMap(action => this.githubService.searchUser(action.props.input).pipe(
