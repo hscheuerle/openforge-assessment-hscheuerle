@@ -89,7 +89,7 @@
                 <!-- TODO: fix this temp that makes sure link provides protocol -->
                 <!-- User's Blog (or Website) -->
                 <ion-item lines="none" [detail]="user.blog" href
-                  (click)="openInAppBrowser($event, 'https://' + user.blog.replace('http://','').replace('https://', ''))">
+                  (click)="openInAppBrowser($event, user.blog)">
                   <ion-icon name="link" slot="start" size="small"></ion-icon>
                   <ion-label *ngIf="user.blog; else notProvided">
                     <h3>{{ user.blog }}</h3>
@@ -100,7 +100,11 @@
               </ion-card-content>
             </ion-card>
 
-
+            <ion-card>
+              <ion-card-header>
+                testing
+              </ion-card-header>
+            </ion-card>
           </ion-col>
         </ion-row>
 

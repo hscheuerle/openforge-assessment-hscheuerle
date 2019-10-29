@@ -49,7 +49,8 @@ export class Tab2Page {
   // TODO: search for how to choose target based on system
   openInAppBrowser(event, blog) {
     event.preventDefault();
-    this.browser = this.iab.create(blog, '_blank');
+    const prefixUrl = 'https://' + blog.replace('http://', '').replace('https://', '');
+    this.browser = this.iab.create(prefixUrl, '_blank');
   }
 
 }
