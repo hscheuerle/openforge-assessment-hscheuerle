@@ -19,7 +19,6 @@ export class Tab1Page implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    // TODO: check if needs to be in did enter and did leave, as routing does not always destroy components in ionic
     this.subscription = this.store.select(state => state.github.users).subscribe(users => {
       this.users = users;
       if (this.eventRef) {
