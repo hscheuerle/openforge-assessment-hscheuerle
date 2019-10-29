@@ -52,8 +52,9 @@ export class Tab2Page {
   }
 
   // TODO: search for how to choose target based on system
-  openInAppBrowser(url) {
-    this.iab.create(url, '_blank', )
+  openInAppBrowser(event, url) {
+    event.preventDefault();
+    this.iab.create(url, '_blank');
   }
 
 }
