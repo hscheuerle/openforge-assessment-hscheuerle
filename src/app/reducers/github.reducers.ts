@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { usersLoadedSuccess, searchUserSuccess, getUserSuccess, clearUser, UserBasic } from '../actions/github.actions';
+import { usersLoadedSuccess, searchUserSuccess, getUserSuccess, clearUser } from '../actions/github.actions';
+import { UserBasic } from '../interfaces/User';
 
 interface GithubState {
     selectedUser: object;

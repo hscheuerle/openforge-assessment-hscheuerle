@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
-import { map, mergeMap, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
 import { GithubService } from '../shared/github.service';
-import { Store } from '@ngrx/store';
-import { searchUser, searchUserSuccess, UserBasic } from '../actions/github.actions';
+import { Store, Action } from '@ngrx/store';
+import { searchUser, searchUserSuccess } from '../actions/github.actions';
+import { UserBasic, SeachedUserSuccessPayload } from '../interfaces/User';
 
 @Injectable()
 export class GithubEffects {
@@ -28,7 +29,7 @@ export class GithubEffects {
     searchUser$ = createEffect(() => this.actions$.pipe(
         ofType(searchUser),
         switchMap(action => this.githubService.searchUser(action.props.input).pipe(
-            map(res => ({ type: '[Github API] Search User Success', payload: res})),
+            map(res => ({ type: '[Github API] Search User Success', payload: res}) as { type: string, payload: SeachedUserSuccessPayload }),
             catchError(() => of({ type: '[Github API] Search User Error'})),
         )
     )));
