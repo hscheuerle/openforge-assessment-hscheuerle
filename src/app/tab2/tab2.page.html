@@ -26,6 +26,8 @@
 
             <ion-card>
 
+              <!-- User's Name and Login -->
+              <!-- TODO: styling defaults for when no name is provided -->
               <ion-item lines="full">
                 <ion-avatar slot="start">
                   <img [src]="user.avatar_url">
@@ -36,6 +38,7 @@
                 </ion-card-header>
               </ion-item>
 
+              <!-- User's Bio -->
               <ion-card-content>
                 <ion-item lines="none">
                   <ion-label class="ion-text-wrap">
@@ -80,6 +83,7 @@
 
                 </ion-item>
 
+                <!-- User's Email -->
                 <ion-item lines="none" [detail]="user.email" [href]="user.email ? 'mailto:' + user.email : undefined">
                   <ion-icon name="mail" slot="start" size="small"></ion-icon>
                   <ion-label *ngIf="user.email; else notProvided">
