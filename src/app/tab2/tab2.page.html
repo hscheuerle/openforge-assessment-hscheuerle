@@ -88,8 +88,7 @@
 
                 <!-- TODO: fix this temp that makes sure link provides protocol -->
                 <!-- User's Blog (or Website) -->
-                <ion-item lines="none" [detail]="user.blog" href
-                  (click)="openInAppBrowser($event, user.blog)">
+                <ion-item lines="none" [detail]="user.blog" href (click)="openInAppBrowser($event, user.blog)">
                   <ion-icon name="link" slot="start" size="small"></ion-icon>
                   <ion-label *ngIf="user.blog; else notProvided">
                     <h3>{{ user.blog }}</h3>
@@ -101,9 +100,17 @@
             </ion-card>
 
             <ion-card>
-              <ion-card-header>
-                testing
-              </ion-card-header>
+              <ion-card-content>
+                <ion-chip color="primary">
+                  <ion-icon name="git-network"></ion-icon>
+                  <ion-label>{{user.public_repos}}</ion-label>
+                </ion-chip>
+                <ion-item lines="none">
+                  <ion-icon name="git-network" slot="start" size="large" [appRepositories]="user.public_repos">
+                  </ion-icon>
+                  <ion-badge color="secondary" slot="start">94</ion-badge>
+                </ion-item>
+              </ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>

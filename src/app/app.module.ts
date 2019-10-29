@@ -17,10 +17,9 @@ import { GithubEffects } from './effects/github.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { RepositoriesDirective } from './shared/repositories.directive';
 
 @NgModule({
-  declarations: [AppComponent, RepositoriesDirective],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
