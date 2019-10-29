@@ -36,7 +36,9 @@ export class Tab2Page implements OnInit {
 
   searchUser(event) {
     const { value } = event.target;
-    this.store.dispatch({ type: '[Github API] Search User', props: { input: value }});
+    if (value !== '') {
+      this.store.dispatch({ type: '[Github API] Search User', props: { input: value }});
+    }
   }
 
 }
