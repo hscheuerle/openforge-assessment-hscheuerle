@@ -86,7 +86,6 @@
                   </ion-label>
                 </ion-item>
 
-                <!-- TODO: fix this temp that makes sure link provides protocol -->
                 <!-- User's Blog (or Website) -->
                 <ion-item lines="none" [detail]="user.blog" href (click)="openInAppBrowser($event, user.blog)">
                   <ion-icon name="link" slot="start" size="small"></ion-icon>
@@ -95,23 +94,40 @@
                   </ion-label>
                 </ion-item>
 
-
-              </ion-card-content>
-            </ion-card>
-
-            <ion-card>
-              <ion-card-content>
-                <ion-chip color="primary">
-                  <ion-icon name="git-network"></ion-icon>
-                  <ion-label>{{user.public_repos}}</ion-label>
-                </ion-chip>
                 <ion-item lines="none">
-                  <ion-icon name="git-network" slot="start" size="large" [appRepositories]="user.public_repos">
-                  </ion-icon>
-                  <ion-badge color="secondary" slot="start">94</ion-badge>
+                  <ion-chip [appColorBreak]="user.public_repos >= 2">
+                    <ion-label>
+                      <h5>
+                          Repositories <strong>{{user.public_repos}}</strong>
+                      </h5>
+                    </ion-label>
+                  </ion-chip>
+                  <!-- Hover or info on click -->
+                  <ion-chip [appColorBreak]="user.public_gists > 5">
+                    <ion-label>
+                      <h5>
+                          Gists <strong>{{user.public_gists}}</strong>
+                      </h5>
+                    </ion-label>
+                  </ion-chip>
+                  <ion-chip [appColorBreak]="user.followers >= 10">
+                      <ion-label>
+                        <h5>
+                            Followers <strong>{{user.followers}}</strong>
+                        </h5>
+                      </ion-label>
+                    </ion-chip>
+                    <ion-chip [appColorBreak]="user.following >= 10">
+                        <ion-label>
+                          <h5>
+                              Following <strong>{{user.following}}</strong>
+                          </h5>
+                        </ion-label>
+                      </ion-chip>
                 </ion-item>
               </ion-card-content>
             </ion-card>
+
           </ion-col>
         </ion-row>
 
