@@ -17,11 +17,15 @@
       debounce="1000"
       placeholder="Search GitHub Users"
       (ionChange)="searchUser($event)"
+      (ionClear)="clearValue"
       [(ngModel)]="value"
       ></ion-searchbar>
   </ion-toolbar>
 
-  <ng-container *ngIf="value && selectedUser$ | async as user">
+  <ng-container *ngIf="selectedUser$ | async as user">
+    <!--  && user.login === value -->
+    <ng-container *ngIf="user && value">
+
     <ion-card>
 
       <ion-item lines="full">
@@ -49,7 +53,7 @@
         <!-- User's Company -->
         <ion-item lines="none">
           <ion-icon name="people" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.company; then ifCompany else noCompany"></ion-label>
+          <ion-label *ngIf="user.company; then ifCompany else notProvided"></ion-label>
           
           <ng-template #ifCompany>
             <ion-text>
@@ -57,7 +61,7 @@
             </ion-text>
           </ng-template>
           
-          <ng-template #noCompany>
+          <ng-template #notProvided>
             <ion-text color="medium"><h4>Not Provided</h4></ion-text>
           </ng-template>
 
@@ -66,7 +70,7 @@
         <!-- User's Location -->
         <ion-item lines="none">
           <ion-icon name="pin" slot="start" size="small"></ion-icon>
-          <ion-label *ngIf="user.location; then ifLocation else noLocation"></ion-label>
+          <ion-label *ngIf="user.location; then ifLocation else notProvided"></ion-label>
 
           <ng-template #ifLocation>
             <ion-text>
@@ -74,26 +78,21 @@
             </ion-text>
           </ng-template>
 
-          <ng-template #noLocation>
-            <ion-text color="medium">
-              <h4>Not Provided</h4>
-            </ion-text>
-          </ng-template>
-
         </ion-item>
         
-        <ion-item lines="none" detail [href]="'mailto:' + user.email">
+        <ion-item lines="none" [detail]="user.email" [href]="user.email ? 'mailto:' + user.email : undefined">
           <ion-icon name="mail" slot="start" size="small"></ion-icon>
-          <ion-label>{{ user.email }}</ion-label>
+          <ion-label *ngIf="user.email; else notProvided"><h3>{{ user.email }}</h3></ion-label>
         </ion-item>
 
         <!-- TODO: fix this temp that makes sure link provides protocol -->
-        <ion-item lines="none" detail [href]="'https://' + user.blog.replace('http://','').replace('https://', '')" rel="noopener" target="_blank">
+        <ion-item lines="none" [detail]="user.blog" [href]="user.blog ? 'https://' + user.blog.replace('http://','').replace('https://', '') : undefined" rel="noopener" target="_blank">
           <ion-icon name="link" slot="start" size="small"></ion-icon>
-          <ion-label>{{ user.blog }}</ion-label>
+          <ion-label *ngIf="user.blog; else notProvided"><h3>{{ user.blog }}</h3></ion-label>
         </ion-item>
       </ion-card-content>
     </ion-card>
-  </ng-container>
 
+  </ng-container>
+  </ng-container>
 </ion-content>

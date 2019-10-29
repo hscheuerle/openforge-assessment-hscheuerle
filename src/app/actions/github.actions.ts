@@ -36,3 +36,4 @@ export const usersLoadedSuccess = createAction('[Github API] Users Loaded Succes
 export const searchUser = createAction('[Github API] Search User', props<{ props: { input: string }}>());
 export const searchUserSuccess = createAction('[Github API] Search User Success', props<{ payload: UserPayload }>());
 export const getUserSuccess = createAction('[Github API] Get User Success', props<{ payload: any }>());
+export const clearUser = createAction('[Github API] Clear User');

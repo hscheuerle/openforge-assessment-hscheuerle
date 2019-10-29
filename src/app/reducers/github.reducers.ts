@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { usersLoadedSuccess, searchUserSuccess, getUserSuccess } from '../actions/github.actions';
+import { usersLoadedSuccess, searchUserSuccess, getUserSuccess, clearUser } from '../actions/github.actions';
 
 export const initialState = {
     selectedUser: undefined,
@@ -20,6 +20,9 @@ const _githubReducer = createReducer(initialState,
     on(getUserSuccess, (state, { payload }) => {
         return { ...state, selectedUser: payload };
     }),
+    on(clearUser, (state) => {
+        return { ...state, selectedUser: undefined };
+    })
 );
 
 export function githubReducer(state, action) {

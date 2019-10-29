@@ -33,11 +33,21 @@ export class Tab2Page {
     }
   }
 
+  ionViewDidLeave() {
+    this.store.dispatch({ type: '[Github API] Clear User'});
+  }
+
   searchUser(event) {
     const { value } = event.target;
     if (value !== '') {
       this.store.dispatch({ type: '[Github API] Search User', props: { input: value } });
+    } else { // when using ctrl + backspace to clear
+      this.store.dispatch({ type: '[Github API] Clear User'});
     }
+  }
+
+  clearValue() {
+    this.store.dispatch({ type: '[Github API] Clear User'});
   }
 
 }
