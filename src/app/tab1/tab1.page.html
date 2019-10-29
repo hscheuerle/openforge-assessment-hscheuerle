@@ -9,7 +9,8 @@
 <ion-content>
   <ion-list *ngFor="let user of users">
     <!-- TODO: link to search tab with search value entered -->
-    <ion-item [href]="'/tabs/tab2?search=' + user.login">
+    <!-- is this reloading? check ion-route usage -->
+    <ion-item [routerLink]="['/tabs/tab2']" [queryParams]="{ search: user.login }">
       <ion-avatar slot="start">
         <img [src]="user.avatar_url" [alt]="'github avatar for user' + user.login">
       </ion-avatar>
