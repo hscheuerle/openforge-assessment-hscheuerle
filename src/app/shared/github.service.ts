@@ -57,5 +57,18 @@ export class GithubService {
       headers: this.options.headers,
     });
   }
+
+  searchTopics(value) {
+    return this.http.get('https://api.github.com/search/topics', {
+      headers: {
+        Accept: 'application/vnd.github.mercy-preview+json',
+        'Content-Type': 'application/json',
+        Authorization: `token ${this.devToken}`,
+      },
+      params: {
+        q: `${value}`,
+      },
+    });
+  }
 }
 

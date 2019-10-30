@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
 import { GithubService } from '../shared/github.service';
 import { Store, Action } from '@ngrx/store';
-import { searchUser, searchUserSuccess } from '../actions/github.actions';
+import { searchUser, searchUserSuccess, searchTopics } from '../actions/github.actions';
 import { UserBasic, SeachedUserSuccessPayload } from '../interfaces/User';
 import { State } from '../reducers';
 
@@ -43,4 +43,14 @@ export class GithubEffects {
             catchError(() => of({ type: '[Github API] Get User Error'})),
         )
     )));
+
+    searchTopics$ = createEffect(() => this.actions$.pipe(
+        ofType(searchTopics),
+        switchMap(action => this.githubService.searchTopics(action.value).pipe(
+            map(res => ({ type: '[Github API] Search Topics Success', topics: res })),
+            catchError(err => of({ type: '[Github API] Search Topics Failure', error: err }).pipe(
+                tap(failureAction => console.error(failureAction.error)),
+            )),
+        )),
+    ));
 }

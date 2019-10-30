@@ -17,3 +17,5 @@ export const getUserSuccess = createAction('[Github API] Get User Success',
     props<{ payload: UserDetailed }>());
 
 export const clearUser = createAction('[Github API] Clear User');
+
+export const searchTopics = createAction('[Github API] Search Topics', props<{ value: string }>());

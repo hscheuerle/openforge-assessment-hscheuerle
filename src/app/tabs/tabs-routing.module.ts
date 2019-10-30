@@ -28,6 +28,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'feed',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../feed/feed.module').then(m => m.FeedModule),
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
