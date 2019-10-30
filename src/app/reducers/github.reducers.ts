@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { usersLoadedSuccess, searchUserSuccess, getUserSuccess, clearUser } from '../actions/github.actions';
 import { UserBasic, UserDetailed } from '../interfaces/User';
 
-interface GithubState {
+export interface GithubState {
     selectedUser: UserDetailed;
     users: UserBasic[];
     since: string;

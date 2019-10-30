@@ -1,24 +1,16 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
-import { githubReducer } from './github.reducers';
-import { UserDetailed, UserBasic } from '../interfaces/User';
+import { githubReducer, GithubState } from './github.reducers';
+import { FeedState, feedReducer } from '../feed/feed.reducers';
 
 export interface State {
-  github: {
-    selectedUser: UserDetailed;
-    users: UserBasic[];
-    since: string;
-  };
+  github: GithubState;
+  feed: FeedState;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  github: githubReducer
+  github: githubReducer,
+  feed: feedReducer,
 };
 
 

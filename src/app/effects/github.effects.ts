@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, withLatestFrom, switchMap, tap, exhaustMap } from 'rxjs/operators';
 import { GithubService } from '../shared/github.service';
-import { Store, Action } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { searchUser, searchUserSuccess, searchTopics } from '../actions/github.actions';
-import { UserBasic, SeachedUserSuccessPayload } from '../interfaces/User';
+import { SeachedUserSuccessPayload } from '../interfaces/User';
 import { State } from '../reducers';
 
 @Injectable()
