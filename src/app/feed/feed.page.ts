@@ -8,16 +8,11 @@ import { tap } from 'rxjs/operators';
     templateUrl: './feed.page.html'
 })
 export class FeedPage {
-    @ViewChild(IonSearchbar, { static: true }) ionSearchbar: IonSearchbar;
-    async ionViewDidEnter() {
-
-        fromEvent(await this.ionSearchbar.getInputElement(), 'ionChange').pipe(
-            tap(event => console.log(event)),
-        );
-
-        this.ionSearchbar.ionChange.asObservable().pipe(
-            tap(event => console.log(event)),
-        );
+    @ViewChild(IonSearchbar, { static: false }) ionSearchbar: IonSearchbar;
+    ionViewDidEnter() {
+        const element = this.ionSearchbar.ionChange.pipe(
+            tap(event => console.log('event')),
+        ).subscribe();
     }
 
     ionViewDidLeave() {
