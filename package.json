@@ -32,7 +32,7 @@
     "cordova-ios": "^5.0.1",
     "cordova-plugin-inappbrowser": "^3.1.0",
     "core-js": "^2.5.4",
-    "parse-link-header": "^1.0.1",
+    "parse-link-header": "^2.0.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
